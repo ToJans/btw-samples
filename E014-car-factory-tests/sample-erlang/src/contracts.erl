@@ -6,8 +6,7 @@
 	format(Rec=#RecordType{}) -> 
 	  FieldNames=record_info(fields, RecordType),
       Values=tl(tuple_to_list(Rec)),
-	  list:replace
-      PropList=lists:zip(FieldNames,[stringify(X)||X<-Values]),
+      PropList=lists:zip(FieldNames,Values),
       subst(FormatString,PropList)
 ).
 
@@ -25,6 +24,3 @@ subst(Fmt,[]) ->
 subst(Fmt,[{K,V}|T]) ->
   Replaced = re:replace(Fmt,"\\{" ++ atom_to_list(K) ++ "\\}",[V],[global,{return,list}]),
     subst(Replaced,T).
-
-stringify(undefined) -> "[?]";
-stringify(X) -> X.
