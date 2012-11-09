@@ -11,6 +11,19 @@
 -define(WHEN(Command),Out=do(State,Command)).
 -define(EXPECT(Event),?assertEqual(Out,Event)).
 
+open_factory_test_() -> [
+{"Open a new factory",fun() ->
+  ?GIVEN([]),
+  ?WHEN(#openFactory{id=?ID}),
+  ?EXPECT(#factoryOpened{id=?ID})
+end},
+{"Open a factory that has been opened before",fun() ->
+  ?GIVEN([#factoryOpened{id=?ID}]),
+  ?WHEN(#openFactory{id=?ID}),
+  ?EXPECT(factory_already_created)
+end}
+].
+
 assign_employee_to_factory_test_() -> [
 {"Empty factory allows any employee not Bender to be assigned", fun()->
     ?GIVEN([#factoryOpened{id=?ID}]),
