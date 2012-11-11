@@ -1,7 +1,7 @@
 -record(openFactory,{id}).
 -record(factoryOpened,{id}).
--record(assignEmployeeToFactory,{id,employeeName}).
--record(employeeAssignedToFactory,{id,employeeName}).
+-record(assignEmployeeToFactory,{id,employeeName,carModel}).
+-record(employeeAssignedToFactory,{id,employeeName,carModel}).
 -record(receiveShipmentInCargoBay,{id,shipmentName, carParts = []}).
 -record(shipmentReceivedInCargoBay,{id,shipment}).
 -record(curseWordUttered,{theWord,meaning}).
